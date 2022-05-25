@@ -17,16 +17,17 @@ class App extends Component {
     };
   }
 
-  componentDidMount() {
-    this.refreshList();
-  }
-
-  refreshList = () => {
-    axios
-      .get("/api/todos/")
-      .then((res) => this.setState({ todoList: res.data }))
-      .catch((err) => console.log(err));
-  };
+componentDidMount() {
+  axios.get("http://localhost:8000/api/todos/")
+  .then(response => {
+    const todoList = response.data
+    this.setState(
+      {
+        'todoList': todoList
+      }
+    )
+  }).catch(error => console.log(error))
+}
 
   toggle = () => {
     this.setState({ modal: !this.state.modal });
